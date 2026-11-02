@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Кедр — барбершоп</title>
+<meta name="description" content="Барбершоп «Кедр»: стрижки, борода, королевское бритьё. Запись по телефону или в Telegram.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💈</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --plum:#14061f; --teal:#0a2330; --coral:#ff5a4f; --gold:#f4c15d; --aqua:#38d6c4;
+  --text:#f6f1ea; --muted:rgba(246,241,234,.72); --line:rgba(255,255,255,.16);
+  --head:"Unbounded","Arial Black",Arial,sans-serif; --body:"Manrope","Segoe UI",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);font-size:18px;line-height:1.6;color:var(--text);min-height:100vh;
+  background:radial-gradient(55% 45% at 88% 8%,rgba(56,214,196,.30),transparent 65%),
+             radial-gradient(45% 40% at 5% 35%,rgba(255,90,79,.24),transparent 65%),
+             linear-gradient(160deg,var(--plum),var(--teal));background-color:var(--plum);overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+h1,h2,h3{font-family:var(--head);line-height:1.1}
+h2{font-size:clamp(26px,4.5vw,42px);margin-bottom:32px}
+
+header{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(20,6,31,.65);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:12px;padding-bottom:12px}
+.logo{font-family:var(--head);font-weight:700;font-size:24px;text-decoration:none}
+nav{display:flex;gap:24px;align-items:center}
+nav a{text-decoration:none;font-weight:600;color:var(--muted)}
+nav a:hover{color:var(--gold)}
+.btn{display:inline-block;padding:15px 28px;border-radius:999px;font-weight:700;text-decoration:none;background:var(--coral);color:#1a0a14;border:2px solid var(--coral);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(255,90,79,.45)}
+.btn.ghost{background:transparent;color:var(--text);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--aqua);box-shadow:0 10px 30px rgba(56,214,196,.3)}
+header .btn{padding:9px 20px}
+
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;padding-top:48px;padding-bottom:56px}
+h1{font-weight:700;font-size:clamp(34px,6vw,66px);margin-bottom:22px}
+.hero p{color:var(--muted);max-width:30em;margin-bottom:32px;font-size:20px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.stage{position:relative;height:520px;touch-action:pan-y}
+#pole3d,#poleFb{position:absolute;inset:0}
+#poleFb{margin:30px auto;width:110px;border-radius:55px/16px;border:2px solid var(--line);
+  background:repeating-linear-gradient(-45deg,var(--coral) 0 20px,#fff 20px 40px,#2a5ccf 40px 60px,#fff 60px 80px);background-size:113px 113px;animation:fb 3s linear infinite}
+@keyframes fb{to{background-position:0 113px}}
+.stage.live #poleFb{display:none}
+
+.marquee{overflow:hidden;border-block:1px solid var(--line);background:rgba(255,255,255,.04);padding:16px 0}
+.track{display:flex;gap:44px;width:max-content;animation:run 28s linear infinite;font-family:var(--head);font-size:20px;white-space:nowrap}
+.track span:nth-child(odd){color:var(--gold)}
+@keyframes run{to{transform:translateX(-50%)}}
+
+section{padding:72px 0}
+.cards{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:18px;align-items:stretch;perspective:1000px}
+.card{border-radius:26px;padding:30px 26px;display:flex;flex-direction:column;gap:10px;min-height:250px;transition:transform .2s ease-out;will-change:transform}
+.card h3{font-size:22px}
+.card .sum{font-family:var(--head);font-size:34px;margin-top:auto}
+.card small{opacity:.85;font-size:16px}
+.c1{background:linear-gradient(150deg,#c8324a,#4a1450)}
+.c2{background:linear-gradient(150deg,var(--gold),#ff8a5b);color:#1a0a14;box-shadow:0 20px 60px rgba(255,138,91,.35)}
+.c3{background:linear-gradient(150deg,#0f7c80,#0a3a4a)}
+.tag{align-self:flex-start;font-size:14px;font-weight:700;padding:4px 12px;border-radius:999px;background:#1a0a14;color:var(--gold)}
+.more{margin-top:34px;list-style:none;border-top:1px solid var(--line)}
+.more li{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.more b{font-family:var(--head);font-weight:500;color:var(--gold);white-space:nowrap}
+
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.ph{aspect-ratio:4/5;border-radius:22px;display:flex;align-items:flex-end;padding:18px;font-size:15px;color:rgba(255,255,255,.85)}
+.ph img{width:100%;height:100%;object-fit:cover;border-radius:22px}
+.g1{background:linear-gradient(160deg,#ff5a4f,#6a1b5e)}
+.g2{background:linear-gradient(160deg,#38d6c4,#0a3a4a)}
+.g3{background:linear-gradient(160deg,#f4c15d,#c8324a)}
+.g4{background:linear-gradient(160deg,#6a5cff,#14061f)}
+
+.reviews{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px}
+.rev{flex:0 0 min(340px,82%);scroll-snap-align:start;border:1px solid var(--line);border-radius:22px;padding:26px;background:rgba(255,255,255,.06);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.rev p{margin-bottom:14px}
+.rev cite{font-style:normal;font-weight:700;color:var(--aqua)}
+
+.cta{text-align:center;border-radius:34px;padding:56px 24px;border:1px solid var(--line);background:linear-gradient(135deg,rgba(255,90,79,.25),rgba(56,214,196,.2))}
+.cta p{color:var(--muted);margin:0 auto 28px;max-width:28em}
+.cta .actions{justify-content:center}
+.contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;margin-top:56px}
+.contacts h3{font-size:16px;color:var(--gold);margin-bottom:8px;font-weight:500}
+.contacts a{color:var(--aqua);font-weight:600}
+footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:15px}
+
+@media (max-width:760px){
+  body{font-size:17px}
+  nav a:not(.btn){display:none}
+  .hero .wrap{grid-template-columns:1fr;padding-top:20px;gap:0}
+  .stage{height:340px;order:-1}
+  .cards{grid-template-columns:1fr}
+  .card{min-height:190px}
+  section{padding:48px 0}
+}
+@media (prefers-reduced-motion:reduce){.track,#poleFb{animation:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top">Кедр</a>
+    <nav aria-label="Основное меню">
+      <a href="#price">Цены</a><a href="#gallery">Работы</a><a href="#reviews">Отзывы</a><a href="#contacts">Контакты</a>
+      <a class="btn" href="tel:+70000000000">Записаться</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Стрижка, которую замечают</h1>
+        <p>Барбершоп «Кедр» в центре города. Запишитесь по телефону или в Telegram, и мастер будет ждать вас в назначенное время.</p>
+        <div class="actions">
+          <a class="btn" href="tel:+70000000000">Записаться</a>
+          <a class="btn ghost" href="https://t.me/username">Написать в Telegram</a>
+        </div>
+      </div>
+      <div class="stage" id="stage" aria-hidden="true"><div id="poleFb"></div><div id="pole3d"></div></div>
+    </div>
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Стрижка</span><span>Борода</span><span>Королевское бритьё</span><span>Укладка</span><span>Детская стрижка</span>
+      <span>Стрижка</span><span>Борода</span><span>Королевское бритьё</span><span>Укладка</span><span>Детская стрижка</span>
+    </div>
+  </div>
+
+  <section id="price">
+    <div class="wrap">
+      <h2>Услуги и цены</h2>
+      <div class="cards">
+        <div class="card c1 tilt"><h3>Мужская стрижка</h3><small>45 минут, мытьё головы и укладка</small><div class="sum">1 500 ₽</div></div>
+        <div class="card c2 tilt"><span class="tag">Выбирают чаще всего</span><h3>Стрижка и борода</h3><small>75 минут, полный образ</small><div class="sum">2 300 ₽</div></div>
+        <div class="card c3 tilt"><h3>Королевское бритьё</h3><small>40 минут, горячее полотенце и опасная бритва</small><div class="sum">1 400 ₽</div></div>
+      </div>
+      <ul class="more">
+        <li><span>Моделирование бороды, 30 минут</span><b>900 ₽</b></li>
+        <li><span>Детская стрижка до 12 лет, 30 минут</span><b>1 000 ₽</b></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="wrap">
+      <h2>Наши работы</h2>
+      <div class="gallery">
+        <!-- Чтобы вставить фото, замените строку на: <div class="ph"><img src="images/work1.jpg" alt="Стрижка"></div> -->
+        <div class="ph g1">Фото работы 1</div>
+        <div class="ph g2">Фото работы 2</div>
+        <div class="ph g3">Фото работы 3</div>
+        <div class="ph g4">Фото работы 4</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="wrap">
+      <h2>Отзывы клиентов</h2>
+      <div class="reviews">
+        <div class="rev"><p>Записался в Telegram за минуту, пришёл вовремя и сразу сел в кресло. Стрижка именно такая, как просил.</p><cite>Алексей</cite></div>
+        <div class="rev"><p>Королевское бритьё стоит попробовать хотя бы раз. Горячее полотенце, аккуратная работа, никаких раздражений.</p><cite>Дмитрий</cite></div>
+        <div class="rev"><p>Привожу сына, ему нравится. Мастер находит подход к ребёнку, сидит спокойно.</p><cite>Сергей</cite></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacts">
+    <div class="wrap">
+      <div class="cta">
+        <h2>Выберите удобное время</h2>
+        <p>Позвоните или напишите в Telegram, мы подтвердим запись и напомним о ней.</p>
+        <div class="actions">
+          <a class="btn" href="tel:+70000000000">Позвонить</a>
+          <a class="btn ghost" href="https://t.me/username">Telegram</a>
+        </div>
+      </div>
+      <div class="contacts">
+        <div><h3>Адрес</h3>ул. Кедровая, 12<br><a href="https://yandex.ru/maps/?text=ул.%20Кедровая%2C%2012">Открыть на карте</a></div>
+        <div><h3>Часы работы</h3>Ежедневно с 10:00 до 21:00</div>
+        <div><h3>Запись</h3><a href="tel:+70000000000">+7 000 000-00-00</a><br><a href="https://t.me/username">@username</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">Демо-сайт для портфолио. Названия, цены и адрес вымышлены.</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* 3D-столб: если библиотека или WebGL недоступны, остаётся плоская анимация */
+(function(){
+  var stage=document.getElementById('stage'),box=document.getElementById('pole3d');
+  if(!window.THREE)return;
+  try{
+    var calm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var r=new THREE.WebGLRenderer({antialias:true,alpha:true});
+    r.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+    var W=function(){return box.clientWidth},H=function(){return box.clientHeight};
+    r.setSize(W(),H());box.appendChild(r.domElement);
+    var scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(32,W()/H(),.1,100);
+    cam.position.set(0,0,11);
+
+    var c=document.createElement('canvas');c.width=c.height=128;var g=c.getContext('2d');
+    g.fillStyle='#f4f1ea';g.fillRect(0,0,128,128);
+    var cols=['#e0382f','#f4f1ea','#2a5ccf','#f4f1ea'];
+    for(var k=-128;k<=128;k+=32){
+      g.fillStyle=cols[((k/32)%4+4)%4];
+      g.beginPath();g.moveTo(k,0);g.lineTo(k+32,0);g.lineTo(k+160,128);g.lineTo(k+128,128);g.fill();
+    }
+    var tex=new THREE.CanvasTexture(c);
+    tex.wrapS=tex.wrapT=THREE.RepeatWrapping;tex.repeat.set(2,5);
+
+    var group=new THREE.Group();scene.add(group);
+    var pole=new THREE.Mesh(new THREE.CylinderGeometry(1,1,6,48,1,true),
+      new THREE.MeshStandardMaterial({map:tex,roughness:.35,metalness:.05}));
+    group.add(pole);
+    var glass=new THREE.Mesh(new THREE.CylinderGeometry(1.12,1.12,6.1,48,1,true),
+      new THREE.MeshStandardMaterial({color:0xbff4ff,transparent:true,opacity:.14,roughness:.05,side:THREE.DoubleSide}));
+    group.add(glass);
+    var brass=new THREE.MeshStandardMaterial({color:0xf4c15d,metalness:.7,roughness:.28});
+    [-3.2,3.2].forEach(function(y){var cap=new THREE.Mesh(new THREE.CylinderGeometry(1.25,1.25,.45,48),brass);cap.position.y=y;group.add(cap)});
+    var ball=new THREE.Mesh(new THREE.SphereGeometry(.7,32,32),brass);ball.position.y=3.9;group.add(ball);
+    var bottom=new THREE.Mesh(new THREE.CylinderGeometry(1.5,1.7,.5,48),brass);bottom.position.y=-3.6;group.add(bottom);
+
+    scene.add(new THREE.AmbientLight(0xffffff,.55));
+    var key=new THREE.DirectionalLight(0xffffff,.9);key.position.set(4,5,6);scene.add(key);
+    var p1=new THREE.PointLight(0xff5a4f,1.1,30);p1.position.set(-6,2,4);scene.add(p1);
+    var p2=new THREE.PointLight(0x38d6c4,1.1,30);p2.position.set(6,-3,4);scene.add(p2);
+
+    var tx=0,tz=0;
+    function aim(e){
+      var b=stage.getBoundingClientRect();
+      tx=((e.clientY-b.top)/b.height-.5)*.5;
+      tz=-((e.clientX-b.left)/b.width-.5)*.4;
+    }
+    window.addEventListener('pointermove',aim);
+    window.addEventListener('resize',function(){r.setSize(W(),H());cam.aspect=W()/H();cam.updateProjectionMatrix()});
+
+    function loop(){
+      requestAnimationFrame(loop);
+      if(!calm)pole.rotation.y+=.012;
+      group.rotation.x+=(tx-group.rotation.x)*.06;
+      group.rotation.z+=(tz-group.rotation.z)*.06;
+      r.render(scene,cam);
+    }
+    stage.classList.add('live');loop();
+  }catch(e){}
+})();
+
+/* наклон карточек под курсором (только мышь) */
+document.querySelectorAll('.tilt').forEach(function(el){
+  el.addEventListener('pointermove',function(e){
+    if(e.pointerType!=='mouse')return;
+    var b=el.getBoundingClientRect(),x=(e.clientX-b.left)/b.width-.5,y=(e.clientY-b.top)/b.height-.5;
+    el.style.transform='rotateX('+(-y*10)+'deg) rotateY('+(x*12)+'deg) translateZ(8px)';
+  });
+  el.addEventListener('pointerleave',function(){el.style.transform=''});
+});
+</script>
+</body>
+</html>
